@@ -63,7 +63,7 @@ public class Robot extends TimedRobot {
     mytalon1.set(ControlMode.PercentOutput, stick);*/
     // Use the joystick X axis for lateral movement, Y axis for forward
     // movement, and Z axis for rotation.
-    m_robotDrive.driveCartesian(-l_stick.getX(), l_stick.getY(), l_stick.getRawAxis(4), 0.0);
+    m_robotDrive.driveCartesian(-l_stick.getX(), l_stick.getY(), -l_stick.getRawAxis(4), 0.0);
     //4 is the X axis of right Joystick
     //this is a test comment
     //test comment #2
