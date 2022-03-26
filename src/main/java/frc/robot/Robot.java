@@ -19,6 +19,7 @@ public class Robot extends TimedRobot {
   WPI_TalonSRX Tal3 = new WPI_TalonSRX(3);
   //sets variable for Talon 3
   private static final int lJoystickChannel = 0;
+  WPI_TalonSRX minicim;
  /* WPI_TalonSRX mytalon1 = new WPI_TalonSRX(1);
   WPI_TalonSRX mytalon2 = new WPI_TalonSRX(2);
   WPI_TalonSRX mytalon3 = new WPI_TalonSRX(3);
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
     WPI_TalonSRX rearLeft = new WPI_TalonSRX(kRearLeftChannel);
     WPI_TalonSRX frontRight = new WPI_TalonSRX(kFrontRightChannel);
     WPI_TalonSRX rearRight = new WPI_TalonSRX(kRearRightChannel);
-
+    minicim = new WPI_TalonSRX(3);
     // Invert the right side motors.
     // You may need to change or remove this to match your robot.
     frontRight.setInverted(true);
@@ -52,9 +53,18 @@ public class Robot extends TimedRobot {
     
     
   }
+  @Override
+  public void autonomousPeriodic(){
+    minicim.set(0.5);
+    m_robotDrive.driveCartesian(0.7, 0.0, 0.0, 0.0);
+  }
 
   @Override
   public void teleopPeriodic() {
+    boolean button1 = l_stick.getRawButton(1);
+    if (button1){
+        minicim.set(0.5);
+      }
    /* double stick = joystick1.getRawAxis(1);
     mytalon2.set(ControlMode.PercentOutput, stick);
     mytalon3.set(ControlMode.PercentOutput, 0);
