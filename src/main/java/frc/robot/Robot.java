@@ -1,8 +1,6 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
-
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -18,6 +16,8 @@ public class Robot extends TimedRobot {
   private static final int kRearLeftChannel = 2;
   private static final int kRearRightChannel = 1;
 
+  WPI_TalonSRX Tal3 = new WPI_TalonSRX(3);
+  //sets variable for Talon 3
   private static final int lJoystickChannel = 0;
   WPI_TalonSRX minicim;
  /* WPI_TalonSRX mytalon1 = new WPI_TalonSRX(1);
@@ -61,10 +61,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    if (l_stick.getRawButton(1));
-
-    if (l_stick.getRawButtonReleased(0));
-    
+    boolean button1 = l_stick.getRawButton(1);
+    if (button1){
+        minicim.set(0.5);
       }
    /* double stick = joystick1.getRawAxis(1);
     mytalon2.set(ControlMode.PercentOutput, stick);
@@ -75,6 +74,15 @@ public class Robot extends TimedRobot {
     // Use the joystick X axis for lateral movement, Y axis for forward
     // movement, and Z axis for rotation.
     m_robotDrive.driveCartesian(-l_stick.getX(), l_stick.getY(), -l_stick.getRawAxis(4), 0.0);
+
+    if (l_stick.getRawButton(4)){
+    Tal3.set(.25);
+     //^^^ says that IF button 4 (y) is pressed, spin motor on Tal3
+    }
+    if  (l_stick.getRawButtonReleased(4)) {
+    Tal3.set(0);
+    //^^^ Says that when button 4 (y) is released, stop spinning motor
+    }
     //4 is the X axis of right Joystick
     //this is a test comment
     //test comment #2
@@ -82,5 +90,4 @@ public class Robot extends TimedRobot {
     //TEST COMMENT
   }
 
-
-
+}
